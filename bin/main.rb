@@ -1,3 +1,15 @@
 #!/usr/bin/env ruby
 
-puts 'Hello world!'
+# Gets player names
+puts 'Player1 enter your name'
+player_one = gets.chomp
+while player_one.size < 3 || player_one.size > 10
+  puts 'Player1 name must not be less than 3 characters and not morethan 10 charaters'
+  player_one = gets.chomp
+end
+puts 'Player2 enter your name'
+player_two = gets.chomp
+while player_two.size < 3 || player_two.size > 10
+  puts 'Player2 name must not be less than 3 characters and not morethan 10 charaters'
+  player_two = gets.chomp
+end
