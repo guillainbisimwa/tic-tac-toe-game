@@ -13,3 +13,7 @@ while player_two.size < 3 || player_two.size > 10
   puts 'Player2 name must not be less than 3 characters and not morethan 10 charaters'
   player_two = gets.chomp
 end
+
+# Display players names
+puts "\nThe first palyer is #{player_one}"
+puts "The second palyer is #{player_two}"
