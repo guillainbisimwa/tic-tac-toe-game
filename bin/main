@@ -1,6 +1,5 @@
-# rubocop:disable Style/ConditionalAssignment
-
 #!/usr/bin/env ruby
+# rubocop:disable Style/ConditionalAssignment
 
 # Gets player names
 puts 'Player1 enter your name'
