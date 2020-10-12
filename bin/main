@@ -21,7 +21,7 @@ puts "The second player is #{player_two}"
 # Chosing a symbol
 puts "\nChoose a symbol 'x' or 'o' to play"
 
-puts "\n#{player_one}, your a the first, choose a symbol: "
+puts "\n#{player_one}, you are the first player, choose a symbol: "
 
 player1_symb = gets.chomp
 while player1_symb != 'x' && player1_symb != 'o'
@@ -32,3 +32,10 @@ end
 player1_symb == 'x' ? player2_symb = 'o' : player2_symb = 'x'
 
 puts "\nLet's start, #{player_one} (#{player1_symb}) and #{player_two} (#{player2_symb})"
+puts "+---+---+---+"
+puts "| 1 | 2 | 3 |"
+puts "+---+---+---+"
+puts "| 4 | 5 | 6 |"
+puts "+---+---+---+"
+puts "| 7 | 8 | 9 |"
+puts "+---+---+---+"
