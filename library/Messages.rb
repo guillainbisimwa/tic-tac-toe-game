@@ -7,8 +7,13 @@ class Message
   def initialize(info)
     @info = info
   end
+
   def name_length?(from, to)
     @info.size < from || @info.size > to
   end
 
+  def valid_symbols?(symb)
+    return true if symb == 'o' || symb == 'x'
+    false 
+  end
 end
