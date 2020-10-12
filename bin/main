@@ -1,3 +1,5 @@
+# rubocop:disable Style/ConditionalAssignment
+
 #!/usr/bin/env ruby
 
 # Gets player names
@@ -78,3 +80,5 @@ puts '| x | x | o |'
 puts '+---+---+---+'
 
 puts "\nCongratulations #{player_one}, you won the game!"
+
+# rubocop:enable Style/ConditionalAssignment
