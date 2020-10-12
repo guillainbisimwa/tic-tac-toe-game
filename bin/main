@@ -31,16 +31,18 @@ end
 
 player1_symb == 'x' ? player2_symb = 'o' : player2_symb = 'x'
 
+# Display the board
 puts "\nLet's start, #{player_one} (#{player1_symb}) and #{player_two} (#{player2_symb})"
-puts "+---+---+---+"
-puts "| 1 | 2 | 3 |"
-puts "+---+---+---+"
-puts "| 4 | 5 | 6 |"
-puts "+---+---+---+"
-puts "| 7 | 8 | 9 |"
-puts "+---+---+---+"
+puts '+---+---+---+'
+puts '| 1 | 2 | 3 |'
+puts '+---+---+---+'
+puts '| 4 | 5 | 6 |'
+puts '+---+---+---+'
+puts '| 7 | 8 | 9 |'
+puts '+---+---+---+'
 
-puts "#{player_one} please select a number from 1-9 on the board"
+# Select player choices
+puts "\n#{player_one} please select a number from 1-9 on the board"
 
 player_one_choice = gets.chomp.to_i
 while player_one_choice < 1 || player_one_choice > 9
@@ -48,13 +50,31 @@ while player_one_choice < 1 || player_one_choice > 9
   player_one_choice = gets.chomp.to_i
 end
 
-puts "#{player_two} please select a number from 1-9 on the board"
+puts '+---+---+---+'
+puts '| x | 2 | 3 |'
+puts '+---+---+---+'
+puts '| 4 | 5 | 6 |'
+puts '+---+---+---+'
+puts '| 7 | 8 | 9 |'
+puts '+---+---+---+'
+
+puts "\n#{player_two} please select a number from 1-9 on the board"
 player_two_choice = gets.chomp.to_i
 while player_one_choice == player_two_choice || player_two_choice < 1 || player_two_choice > 9
   if player_one_choice == player_two_choice
-    puts "This number has already been taken"
+    puts 'This number has already been taken'
   else
     puts "#{player_two}, please choose the right number"
   end
   player_two_choice = gets.chomp.to_i
 end
+
+puts '+---+---+---+'
+puts '| x | o | o |'
+puts '+---+---+---+'
+puts '| o | x | o |'
+puts '+---+---+---+'
+puts '| x | x | o |'
+puts '+---+---+---+'
+
+puts "\nCongratulations #{player_one}, you won the game!"
