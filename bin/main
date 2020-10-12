@@ -7,7 +7,7 @@ while player_one.size < 3 || player_one.size > 10
   puts 'Player1 name must not be less than 3 characters and not morethan 10 charaters'
   player_one = gets.chomp
 end
-puts 'Player2 enter your name'
+puts "\nPlayer2 enter your name"
 player_two = gets.chomp
 while player_two.size < 3 || player_two.size > 10
   puts 'Player2 name must not be less than 3 characters and not morethan 10 charaters'
@@ -15,5 +15,20 @@ while player_two.size < 3 || player_two.size > 10
 end
 
 # Display players names
-puts "\nThe first palyer is #{player_one}"
-puts "The second palyer is #{player_two}"
+puts "\nThe first player is #{player_one}"
+puts "The second player is #{player_two}"
+
+# Chosing a symbol
+puts "\nChoose a symbol 'x' or 'o' to play"
+
+puts "\n#{player_one}, your a the first, choose a symbol: "
+
+player1_symb = gets.chomp
+while player1_symb != 'x' && player1_symb != 'o'
+  puts 'Player1, choose a symbol "x" or "o" '
+  player1_symb = gets.chomp
+end
+
+player1_symb == 'x' ? player2_symb = 'o' : player2_symb = 'x'
+
+puts "\nLet's start, #{player_one} (#{player1_symb}) and #{player_two} (#{player2_symb})"
