@@ -4,6 +4,7 @@
 require './library/Messages'
 
 class TicTacToe
+
   attr_accessor :p_1, :p_2, :p_1_symb, :p_2_symb
 
   def initialize; end
@@ -20,23 +21,25 @@ class TicTacToe
   end
 
   # This method draw the board for the game
-  def board
-  matrix =[1, 2, 3, 4, 5, 6, 7, 8, 9]
+  def board(table)
     i = 0
-    while i < matrix.size
-      puts "+---+---+---+" 
-      puts "| #{matrix[i].to_s} | #{matrix[i + 1].to_s} | #{matrix[i + 2].to_s} |"
+    while i < table.size
+      puts '+---+---+---+'
+      puts "| #{table[i]} | #{table[i + 1]} | #{table[i + 2]} |"
       i += 3
     end
-  end 
-  # This method display the board, places the symbols and valid an user's move
-  def move
+    puts '+---+---+---+'
+  end
 
+  # This method return a modified array, places the symbols and valid an user's move
+  def move(table, choice, symb)
+    table[table.index(choice)] = symb
+    table
   end
 
   # This method check if the game is ended
   def won
-
+    false
   end
 
 end
@@ -86,7 +89,41 @@ end
 # Display the Players
 puts "\nLet's start, #{game.p_1}: (#{game.p_1_symb})"
 puts "Let's start, #{game.p_2}: (#{game.p_2_symb})"
-game.board
+
+# init table
+table = [1, 2, 3, 4, 5, 6, 7, 'x', 9]
+
+# Dispaly the board
+game.board(table)
+
+# Start playing
+loop do
+  p_1_choice = game.u_entry("#{game.p_1} please select a number from 1-9")
+  until messages.valid_nbr_from_board?(p_1_choice.to_i, 1, 9) && table.any?(p_1_choice.to_i)
+    if table.none?(p_1_choice.to_i)
+      p_1_choice = game.u_entry("\n#{game.p_1} Number already taken, retry")
+    else
+      p_1_choice = game.u_entry("#{game.p_1} please v select a number from 1-9")
+    end
+  end
+
+  # move, player 1
+  table = game.move(table, p_1_choice.to_i, game.p_1_symb.to_s)
+
+  game.board(table)
+
+
+  # won : win or draw, break the loop
+
+
+  # p_2_choice = game.u_entry("#{game.p_2} please select a number from 1-9")
+  # # until messages.valid_nbr_from_board?(p_2_choice.to_i, 1, 9)
+  # #   p_2_choice = game.u_entry("#{game.p_2} please select a number from 1-9")
+  # # end
+
+  
+
+end
 
 
 #Display game board
