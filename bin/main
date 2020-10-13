@@ -91,7 +91,7 @@ while game_on
   puts '+---+---+---+'
 
   message2 = 'The game is tie!'
-  if message1 
+  if message1
     puts message1
     game_on = false
   elsif message2
