@@ -4,21 +4,19 @@
 require './library/Messages'
 
 class TicTacToe
-  attr_accessor :player1, :player2, :player1_symb, :player2_symb
+  attr_accessor :p_1, :p_2, :p_1_symb, :p_2_symb
 
   def initialize; end
 
-  # This method Set players names
-  def players(player_msg)
-    puts "#{player_msg}"
+  # This method Set players names and symbols
+  def u_entry(player_msg)
+    puts player_msg.to_s
     player = gets.chomp
   end
-  def compare_players?
-     @player1 == @player2
-  end
-  # This method display symbols and assigns each symbol to an user on the board
-  def symbols
 
+  # Check if name or symbol is already taken
+  def compare_user_entry?
+    @p_1 == @p_2
   end
 
   # This method display the board, places the symbols and valid an user's move
@@ -36,31 +34,48 @@ end
 
 # Instaciate TicTacToe class
 game = TicTacToe.new
-game.player1 = game.players('Player1 enter your name: ')
+game.p_1 = game.u_entry('Player1 enter your name: ')
 
 # Instaciate Messages class
 messages = Message.new
-messages.info = game.player1
+messages.info = game.p_1
 
 while messages.name_length?(3, 10)
-  game.player1 = game.players('Player1 name must be between 3 to 10 characters')
-  messages.info = game.player1
+  game.p_1 = game.u_entry('Player1 name must be between 3 to 10 characters')
+  messages.info = game.p_1
 end
 
-game.player2 = game.players('Player2 enter your name: ')
-messages.info = game.player2
+game.p_2 = game.u_entry("\nPlayer2 enter your name: ")
+messages.info = game.p_2
 
-while messages.name_length?(3, 10) || game.compare_players?
-  if game.compare_players?
-    game.player2 = game.players('Name already taken!')
-    messages.info = game.player2
+while messages.name_length?(3, 10) || game.compare_user_entry?
+  if game.compare_user_entry?
+    game.p_2 = game.u_entry('Name already taken!')
+    messages.info = game.p_2
   else
-    game.player2 = game.players('Player2 name must be between 3 to 10 characters')
-    messages.info = game.player2
-  end 
+    game.p_2 = game.u_entry('Player2 name must be between 3 to 10 characters')
+    messages.info = game.p_2
+  end
 end
 
+# Choosing a symbols
+puts "\nChoose a symbol 'x' or 'o' to play"
+game.p_1_symb = game.u_entry("#{game.p_1}, choose a symbol: ")
 
+until messages.valid_symbols?(game.p_1_symb)
+  game.p_1_symb = game.u_entry("Invalid symbol, retry again 'x' or 'o'")
+  messages.info = game.p_1
+end
+
+if game.p_1_symb == 'x'
+  game.p_2_symb = 'o'
+else
+  game.p_2_symb = 'x'
+end
+
+# Display the Players
+puts "\nLet's start, #{game.p_1}: (#{game.p_1_symb})"
+puts "Let's start, #{game.p_2}: (#{game.p_2_symb})"
 
 # # Gets player names
 # puts 'Player1 enter your name'
@@ -89,17 +104,17 @@ end
 
 # puts "\n#{player_one}, you are the first player, choose a symbol: "
 
-# player1_symb = gets.chomp
-# while player1_symb != 'x' && player1_symb != 'o'
+# p_1_symb = gets.chomp
+# while p_1_symb != 'x' && p_1_symb != 'o'
 #   puts 'Player1, choose a symbol "x" or "o" '
-#   player1_symb = gets.chomp
+#   p_1_symb = gets.chomp
 # end
 
-# player1_symb == 'x' ? player2_symb = 'o' : player2_symb = 'x'
+# p_1_symb == 'x' ? p_2_symb = 'o' : p_2_symb = 'x'
 
 # # Display the board
-# puts "\nLet's start, #{player_one}: (#{player1_symb})"
-# puts "Let's start, #{player_two}: (#{player2_symb})"
+# puts "\nLet's start, #{player_one}: (#{p_1_symb})"
+# puts "Let's start, #{player_two}: (#{p_2_symb})"
 # puts '+---+---+---+'
 # puts '| 1 | 2 | 3 |'
 # puts '+---+---+---+'
