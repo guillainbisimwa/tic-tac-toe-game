@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-# rubocop:disable Style/ConditionalAssignment
 
+# rubocop:disable Style/ConditionalAssignment
 class TicTacToe
   attr_accessor :player1, :player2, :player1_symb, :player2_symb
 
@@ -37,17 +37,22 @@ game.player2 = game.players('Player2')
 puts game.player2
 
 
+
 # # Gets player names
 # puts 'Player1 enter your name'
 # player_one = gets.chomp
 # while player_one.size < 3 || player_one.size > 10
-#   puts 'Player1 name must not be less than 3 characters and not morethan 10 charaters'
+#   puts 'Player1 name must be between 3 to 10 charaters'
 #   player_one = gets.chomp
 # end
 # puts "\nPlayer2 enter your name"
 # player_two = gets.chomp
 # while player_two.size < 3 || player_two.size > 10 || player_two == player_one
-#   puts 'Player2 name must not be less than 3 characters and not morethan 10 charaters and different from player1 name'
+#   if player_two == player_one
+#     puts 'Name already taken! Choose an other name'
+#   else
+#     puts 'Player2 name must be between 3 to 10 charaters'
+#   end
 #   player_two = gets.chomp
 # end
 
@@ -69,7 +74,8 @@ puts game.player2
 # player1_symb == 'x' ? player2_symb = 'o' : player2_symb = 'x'
 
 # # Display the board
-# puts "\nLet's start, #{player_one} (#{player1_symb}) and #{player_two} (#{player2_symb})"
+# puts "\nLet's start, #{player_one}: (#{player1_symb})"
+# puts "Let's start, #{player_two}: (#{player2_symb})"
 # puts '+---+---+---+'
 # puts '| 1 | 2 | 3 |'
 # puts '+---+---+---+'
@@ -83,10 +89,10 @@ puts game.player2
 # while game_on
 #   puts "\n#{player_one} please select a number from 1-9 on the board"
 
-#   player_one_choice = gets.chomp.to_i
-#   while player_one_choice < 1 || player_one_choice > 9
+#   p1_choice = gets.chomp.to_i
+#   while p1_choice < 1 || p1_choice > 9
 #     puts "#{player_one}, please choose the right number"
-#     player_one_choice = gets.chomp.to_i
+#     p1_choice = gets.chomp.to_i
 #   end
 
 #   puts '+---+---+---+'
@@ -98,14 +104,14 @@ puts game.player2
 #   puts '+---+---+---+'
 
 #   puts "\n#{player_two} please select a number from 1-9 on the board"
-#   player_two_choice = gets.chomp.to_i
-#   while player_one_choice == player_two_choice || player_two_choice < 1 || player_two_choice > 9
-#     if player_one_choice == player_two_choice
+#   p2_choice = gets.chomp.to_i
+#   while p1_choice == p2_choice || p2_choice < 1 || p2_choice > 9
+#     if p1_choice == p2_choice
 #       puts 'This number has already been taken'
 #     else
 #       puts "#{player_two}, please choose the right number"
 #     end
-#     player_two_choice = gets.chomp.to_i
+#     p2_choice = gets.chomp.to_i
 #   end
 
 #   puts '+---+---+---+'
