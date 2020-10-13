@@ -3,12 +3,9 @@ This class is only for testing
 length for given string and return the size
 =end
 class Message
-  attr_reader :info, :from, :to
-  def initialize(info)
-    @info = info
-    @from = 0
-    @to = 0
-  end
+  attr_accessor :info
+  attr_reader :from, :to
+  def initialize; end
 
   def name_length?(from, to)
     @info.size < from || @info.size > to
@@ -16,7 +13,7 @@ class Message
 
   def valid_symbols?(symb)
     return true if symb == 'o' || symb == 'x'
-    false 
+    false
   end
 
   def valid_nbr_from_board?(nbr, from, to)

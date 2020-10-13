@@ -1,14 +1,16 @@
 #!/usr/bin/env ruby
 
 # rubocop:disable Style/ConditionalAssignment
+require './library/Messages'
+
 class TicTacToe
   attr_accessor :player1, :player2, :player1_symb, :player2_symb
 
   def initialize; end
 
   # This method Set players names
-  def players(player_name)
-    puts "#{player_name} enter your name"
+  def players(player_msg)
+    puts "#{player_msg}"
     player = gets.chomp
   end
 
@@ -29,11 +31,22 @@ class TicTacToe
 
 end
 
+
+# Instaciate TicTacToe class
 game = TicTacToe.new
-game.player1 = game.players('Player1')
-puts game.player1
+game.player1 = game.players('Player1 enter your name: ')
+
+# Instaciate Messages class
+messages = Message.new
+messages.info = game.player1
+
+while messages.name_length?(3, 10)
+  game.player1 = game.players('Player1 name must be between 3 to 10 characters')
+  messages.info = game.player1
+end
 
 game.player2 = game.players('Player2')
+
 puts game.player2
 
 
