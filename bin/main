@@ -13,7 +13,9 @@ class TicTacToe
     puts "#{player_msg}"
     player = gets.chomp
   end
-
+  def compare_players?
+     @player1 == @player2
+  end
   # This method display symbols and assigns each symbol to an user on the board
   def symbols
 
@@ -45,9 +47,18 @@ while messages.name_length?(3, 10)
   messages.info = game.player1
 end
 
-game.player2 = game.players('Player2')
+game.player2 = game.players('Player2 enter your name: ')
+messages.info = game.player2
 
-puts game.player2
+while messages.name_length?(3, 10) || game.compare_players?
+  if game.compare_players?
+    game.player2 = game.players('Name already taken!')
+    messages.info = game.player2
+  else
+    game.player2 = game.players('Player2 name must be between 3 to 10 characters')
+    messages.info = game.player2
+  end 
+end
 
 
 
