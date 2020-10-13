@@ -10,8 +10,8 @@ while player_one.size < 3 || player_one.size > 10
 end
 puts "\nPlayer2 enter your name"
 player_two = gets.chomp
-while player_two.size < 3 || player_two.size > 10
-  puts 'Player2 name must not be less than 3 characters and not morethan 10 charaters'
+while player_two.size < 3 || player_two.size > 10 || player_two == player_one
+  puts 'Player2 name must not be less than 3 characters and not morethan 10 charaters and different from player1 name'
   player_two = gets.chomp
 end
 
@@ -80,7 +80,7 @@ while game_on
   puts '| x | x | o |'
   puts '+---+---+---+'
 
-  message1 = "Congratulations #{player_one}, you won the game!"
+  message1 = "Great move #{player_one}, you won the game!"
 
   puts '+---+---+---+'
   puts '| x | o | x |'
@@ -91,7 +91,13 @@ while game_on
   puts '+---+---+---+'
 
   message2 = 'The game is tie!'
-  game_on = false if message1 || message2
+  if message1 
+    puts message1
+    game_on = false
+  elsif message2
+    puts message2
+    game_on = false
+  end
 
 end
 
