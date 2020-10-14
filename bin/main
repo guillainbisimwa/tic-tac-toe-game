@@ -38,8 +38,25 @@ class TicTacToe
   end
 
   # This method check if the game is ended
-  def won
-    false
+  def won(table)
+    i = 0
+    while i < table.size
+    if (p_1_symb == table[i]) && table[i] == table[i + 1] && table[i] == table[i + 2]
+      puts "#{p_1} Horizontal win"
+      break
+    end
+    i += 3
+   
+    # elsif table[i] == table[i + 3] && table[i] == table[i + 6]
+    #   puts 'Vertical win'
+    # elsif table[i] == table[i + 4] && table[i] == table[i + 8]
+    #   puts 'Diagonal win'
+    # elsif table[i + 2] == table[i + 4] && table[i + 2] == table[i + 6]
+    #   puts table[i + 2]
+    # end
+    # i += 1
+  end
+   
   end
 
 end
@@ -123,7 +140,7 @@ loop do
   game.board(table)
 
   # won : win or draw, break the loop
-  
+  game.won(table)
 end
 
 # rubocop:enable Style/ConditionalAssignment
