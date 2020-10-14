@@ -39,14 +39,8 @@ class TicTacToe
   end
   
   # This method check if the game is draw
-  def won(tab)
-    i = 0
-    while i < tab.size
-      if (p_1_symb == tab[i]) && tab[i] == tab[i + 1] && tab[i] == tab[i + 2]
-        puts "#{p_1} Horizontal win"
-      end
-      i += 3
-    end
+  def won
+    false
   end
   # This method check if the game is draw
 
@@ -136,7 +130,16 @@ loop do
   table = game.move(table, p_1_choice.to_i, game.p_1_symb.to_s)
 
   game.board(table)
-  break if game.draw(table)
+  i = 0
+  while i < table.size
+    if (game.p_1_symb == table[i]) &&
+       (table[i] == table[i + 1] && table[i] == table[i + 2])
+      puts "Congratulations #{game.p_1}, you win the game!"
+      return !game.won
+    end
+    i += 3
+  end
+  break if game.won || game.draw(table)
 
   p_2_choice = game.u_entry("#{game.p_2} please select a number from 1-9")
   until messages.valid_nbr_from_board?(p_2_choice.to_i, 1, 9, table)[0] &&
@@ -153,15 +156,17 @@ loop do
   table = game.move(table, p_2_choice.to_i, game.p_2_symb.to_s)
 
   game.board(table)
-  break if game.draw(table)
-  # unless valid_move
-  #   puts 'The Game is tie!'
-  #   break
-  # end
-
   # won : win or draw, break the loop
-  
-  # game.won(table)
+  i = 0
+  while i < table.size
+    if (game.p_2_symb == table[i]) &&
+       (table[i] == table[i + 1] && table[i] == table[i + 2])
+      puts "Congratulations #{game.p_2}, you win the game!"
+      return !game.won
+    end
+    i += 3
+  end
+  break if game.won || game.draw(table)
 end
 
 # rubocop:enable Style/ConditionalAssignment
