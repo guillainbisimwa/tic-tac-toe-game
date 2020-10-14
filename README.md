@@ -22,7 +22,7 @@ Tic-Tac-Toe is one of the most famous games in the world. We have implemented it
 3. Copy and paste the following code into the Terminal:
    `git clone https://github.com/guillainbisimwa/tic-tac-toe-game.git`
 4. Run `cd tic-tac-toe-game`
-5. Run `ruby main.rb`
+5. Run `ruby bin/main.rb`
 
 ## Rules for Tic-Tac-Toe
 
@@ -32,14 +32,14 @@ Tic-Tac-Toe is one of the most famous games in the world. We have implemented it
 - When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.
 
 ```
-
-+---+---+---+
-| 1 | 2 | 3 |
-+---+---+---+
-| 4 | 5 | 6 |
-+---+---+---+
-| 7 | 8 | 9 |
-+---+---+---+
+     (1)             (2)             (3)             (4)             (5)
++---+---+---+   +---+---+---+   +---+---+---+   +---+---+---+   +---+---+---+
+| 1 | 2 | 3 |   | o | x | o |   | 1 | o | o |   | x |`o`| x |   | x | o | o |
++---+---+---+   +---+---+---+   +---+---+---+   +---+---+---+   +---+---+---+
+| 4 | 5 | 6 |   | 4 | o | x |   | x | x | x |   | x |`o`| 6 |   | o | x | x |
++---+---+---+   +---+---+---+   +---+---+---+   +---+---+---+   +---+---+---+
+| 7 | 8 | 9 |   | x | x | o |   | o | o | x |   | x |`o`| o |   | x | o | o |
++---+---+---+   +---+---+---+   +---+---+---+   +---+---+---+   +---+---+---+
 
 ```
 
