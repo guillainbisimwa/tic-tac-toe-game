@@ -19,7 +19,8 @@ Tic-Tac-Toe is one of the most famous games in the world. We have implemented it
 
 1. Open Terminal.
 2. Navigate to your desired location to download the contents of this repository.
-3. Copy and paste the following code into the Terminal: git clone `https://github.com/guillainbisimwa/tic-tac-toe-game.git`
+3. Copy and paste the following code into the Terminal:
+   `git clone https://github.com/guillainbisimwa/tic-tac-toe-game.git`
 4. Run `cd tic-tac-toe-game`
 5. Run `ruby main.rb`
 
@@ -30,7 +31,7 @@ Tic-Tac-Toe is one of the most famous games in the world. We have implemented it
 - The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner.
 - When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.
 
----
+```
 
 +---+---+---+
 | 1 | 2 | 3 |
@@ -40,7 +41,7 @@ Tic-Tac-Toe is one of the most famous games in the world. We have implemented it
 | 7 | 8 | 9 |
 +---+---+---+
 
----
+```
 
 ## Setup
 
