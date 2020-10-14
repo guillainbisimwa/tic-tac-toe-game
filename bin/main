@@ -31,34 +31,34 @@ class TicTacToe
     puts '+---+---+---+'
   end
 
-  # This method return a modified array, places the symbols and valid an user's move
+  # This method return a modified array,
+  # places the symbols and valid an user's move
   def move(table, choice, symb)
     table[table.index(choice)] = symb
     table
   end
 
   # This method check if the game is ended
-  def won(table)
+  # And also anounce the winner
+  def won(tab)
     i = 0
-    while i < table.size
-    if (p_1_symb == table[i]) && table[i] == table[i + 1] && table[i] == table[i + 2]
-      puts "#{p_1} Horizontal win"
-      break
-    end
-    i += 3
-   
-    # elsif table[i] == table[i + 3] && table[i] == table[i + 6]
-    #   puts 'Vertical win'
-    # elsif table[i] == table[i + 4] && table[i] == table[i + 8]
-    #   puts 'Diagonal win'
-    # elsif table[i + 2] == table[i + 4] && table[i + 2] == table[i + 6]
-    #   puts table[i + 2]
-    # end
-    # i += 1
-  end
-   
-  end
+    while i < tab.size
+      if (p_1_symb == tab[i]) && tab[i] == tab[i + 1] && tab[i] == tab[i + 2]
+        puts "#{p_1} Horizontal win"
+        break
+      end
+      i += 3
 
+      # elsif table[i] == table[i + 3] && table[i] == table[i + 6]
+      #   puts 'Vertical win'
+      # elsif table[i] == table[i + 4] && table[i] == table[i + 8]
+      #   puts 'Diagonal win'
+      # elsif table[i + 2] == table[i + 4] && table[i + 2] == table[i + 6]
+      #   puts table[i + 2]
+      # end
+      # i += 1
+    end
+  end
 end
 
 
@@ -116,31 +116,28 @@ game.board(table)
 # Start playing
 loop do
   p_1_choice = game.u_entry("#{game.p_1} please select a number from 1-9")
-  until messages.valid_nbr_from_board?(p_1_choice.to_i, 1, 9) && table.any?(p_1_choice.to_i)
-    if table.none?(p_1_choice.to_i)  && p_1_choice.to_i > 0 && p_1_choice.to_i < 10
+  until messages.valid_nbr_from_board?(p_1_choice.to_i, 1, 9, table)[0] &&
+        messages.valid_nbr_from_board?(p_1_choice.to_i, 1, 9, table)[1]
+
+    if messages.valid_nbr_from_board?(p_1_choice.to_i, 1, 9, table)[0] &&
+       !messages.valid_nbr_from_board?(p_1_choice.to_i, 1, 9, table)[1]
       p_1_choice = game.u_entry("\n#{game.p_1} Number already taken, retry")
     else
-      p_1_choice = game.u_entry("#{game.p_1} please select a number from 1-9")
+      p_1_choice = game.u_entry("#{game.p_1} please select v a number from 1-9")
     end
   end
+
   table = game.move(table, p_1_choice.to_i, game.p_1_symb.to_s)
+
   game.board(table)
 
-  # Player2 choice
-
-  p_2_choice = game.u_entry("#{game.p_2} please select a number from 1-9")
-  until messages.valid_nbr_from_board?(p_2_choice.to_i, 1, 9) && table.any?(p_2_choice.to_i)
-    if table.none?(p_2_choice.to_i) && p_2_choice.to_i > 0 && p_2_choice.to_i < 10
-      p_2_choice = game.u_entry("\n#{game.p_2} Number already taken, retry")
-    else
-      p_2_choice = game.u_entry("#{game.p_2} please select a number from 1-9")
-    end
-  end
-  table = game.move(table, p_2_choice.to_i, game.p_2_symb.to_s)
-  game.board(table)
+  # unless valid_move
+  #   puts 'The Game is tie!'
+  #   break
+  # end
 
   # won : win or draw, break the loop
-  game.won(table)
+  # game.won(table)
 end
 
 # rubocop:enable Style/ConditionalAssignment
