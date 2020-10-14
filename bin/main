@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # rubocop:disable Style/ConditionalAssignment, Style/BlockLength
-require './library/Messages'
+require './library/messages'
 
 class TicTacToe
   attr_accessor :p_1, :p_2, :p_1_symb, :p_2_symb

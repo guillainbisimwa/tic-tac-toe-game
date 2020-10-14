@@ -1,7 +1,3 @@
-=begin
-This class is only for testing
-length for given string and return the size
-=end
 class Message
   attr_accessor :info
   attr_reader :from, :to
