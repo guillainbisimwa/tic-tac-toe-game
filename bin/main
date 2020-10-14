@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 
-# rubocop:disable Style/ConditionalAssignment
+# rubocop:disable Style/ConditionalAssignment, Style/BlockLength
 require './library/Messages'
 
 class TicTacToe
-
   attr_accessor :p_1, :p_2, :p_1_symb, :p_2_symb
 
   def initialize; end
@@ -13,6 +12,7 @@ class TicTacToe
   def u_entry(player_msg)
     puts player_msg.to_s
     player = gets.chomp
+    player
   end
 
   # Check if name or symbol is already taken
@@ -37,30 +37,22 @@ class TicTacToe
     table[table.index(choice)] = symb
     table
   end
-  
+
   # This method check if the game is draw
   def won
     false
   end
-  # This method check if the game is draw
 
+  # This method check if the game is draw
   def draw(tab)
     if tab.none?(Integer)
       puts 'The game is tie, play again'
       true
+    else
+      false
     end
   end
-
-  # elsif table[i] == table[i + 3] && table[i] == table[i + 6]
-  #   puts 'Vertical win'
-  # elsif table[i] == table[i + 4] && table[i] == table[i + 8]
-  #   puts 'Diagonal win'
-  # elsif table[i + 2] == table[i + 4] && table[i + 2] == table[i + 6]
-  #   puts table[i + 2]
-  # end
-  # i += 1
 end
-
 
 # Instaciate TicTacToe class
 game = TicTacToe.new
@@ -80,12 +72,11 @@ messages.info = game.p_2
 
 while messages.name_length?(3, 10) || game.compare_user_entry?
   if game.compare_user_entry?
-    game.p_2 = game.u_entry('Name already taken!')
-    messages.info = game.p_2
+    messages.info = game.p_2 = game.u_entry('Name already taken!')
   else
     game.p_2 = game.u_entry('Player2 name must be between 3 to 10 characters')
-    messages.info = game.p_2
   end
+  messages.info = game.p_2
 end
 
 # Choosing a symbols
@@ -133,12 +124,25 @@ loop do
   i = 0
   while i < table.size
     if (game.p_1_symb == table[i]) &&
-       (table[i] == table[i + 1] && table[i] == table[i + 2])
+       (table[i] == table[i + 1] && table[i] == table[i + 2]) ||
+       i.zero? && table[i] == table[i + 4] && table[i] == table[i + 8]
       puts "Congratulations #{game.p_1}, you win the game!"
       return !game.won
     end
     i += 3
   end
+
+  (0..2).each do |nbr|
+    if game.p_1_symb == table[nbr] &&
+       (table[nbr] == table[nbr + 3] &&
+       table[nbr] == table[nbr + 6]) ||
+       nbr == 2 && table[nbr] == table[nbr + 2] && table[nbr] == table[nbr + 4]
+      puts "Congratulations #{game.p_1}, you win the game!"
+      return !game.won
+    end
+    next
+  end
+
   break if game.won || game.draw(table)
 
   p_2_choice = game.u_entry("#{game.p_2} please select a number from 1-9")
@@ -160,13 +164,26 @@ loop do
   i = 0
   while i < table.size
     if (game.p_2_symb == table[i]) &&
-       (table[i] == table[i + 1] && table[i] == table[i + 2])
+       (table[i] == table[i + 1] && table[i] == table[i + 2]) ||
+       i.zero? && table[i] == table[i + 4] && table[i] == table[i + 8]
       puts "Congratulations #{game.p_2}, you win the game!"
       return !game.won
     end
     i += 3
   end
+
+  (0..2).each do |nbr|
+    if game.p_2_symb == table[nbr] &&
+       (table[nbr] == table[nbr + 3] &&
+       table[nbr] == table[nbr + 6]) ||
+       nbr == 2 && table[nbr] == table[nbr + 2] && table[nbr] == table[nbr + 4]
+      puts "Congratulations #{game.p_2}, you win the game!"
+      return !game.won
+    end
+    next
+  end
+
   break if game.won || game.draw(table)
 end
 
-# rubocop:enable Style/ConditionalAssignment
+# rubocop:enable Style/ConditionalAssignment, Style/BlockLength
