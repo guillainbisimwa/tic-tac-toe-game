@@ -13,7 +13,8 @@ Tic-Tac-Toe is one of the most famous games in the world. We have implemented it
 
 ## Prerequisites
 
-[Ruby](https://www.ruby-lang.org/en/) must be installed on your machine.
+- [Ruby](https://www.ruby-lang.org/en/) must be installed on your machine.
+- Text Editor
 
 ## Getting Started
 
@@ -47,15 +48,6 @@ Tic-Tac-Toe is one of the most famous games in the world. We have implemented it
 * (3) Horizontal win for **x**
 * (4) Vertical win for **x**
 * (5) Draw
-
-## Setup
-
-- git clone git@github.com:guillainbisimwa/tic-tac-toe-game.git
-
-## Install
-
-- Ruby
-- Text Editor
 
 ## Authors
 
