@@ -131,6 +131,22 @@ loop do
 
   game.board(table)
 
+  p_2_choice = game.u_entry("#{game.p_2} please select a number from 1-9")
+  until messages.valid_nbr_from_board?(p_2_choice.to_i, 1, 9, table)[0] &&
+        messages.valid_nbr_from_board?(p_2_choice.to_i, 1, 9, table)[1]
+
+    if messages.valid_nbr_from_board?(p_2_choice.to_i, 1, 9, table)[0] &&
+       !messages.valid_nbr_from_board?(p_2_choice.to_i, 1, 9, table)[1]
+      p_2_choice = game.u_entry("\n#{game.p_2} Number already taken, retry")
+    else
+      p_2_choice = game.u_entry("#{game.p_2} please select v a number from 1-9")
+    end
+  end
+
+  table = game.move(table, p_2_choice.to_i, game.p_2_symb.to_s)
+
+  game.board(table)
+
   # unless valid_move
   #   puts 'The Game is tie!'
   #   break
