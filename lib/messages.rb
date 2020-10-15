@@ -1,4 +1,4 @@
-# rubocop:disable Style/Documentation, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/MethodLength, Style/FrozenStringLiteralComment
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 class Message
   attr_accessor :info
   attr_reader :from, :to
@@ -100,4 +100,4 @@ class GameLogic
   end
 end
 
-# rubocop:enable Style/Documentation, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/MethodLength, Style/FrozenStringLiteralComment)
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
