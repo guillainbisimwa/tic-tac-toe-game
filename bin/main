@@ -1,69 +1,20 @@
 #!/usr/bin/env ruby
 
 # rubocop:disable Style/ConditionalAssignment, Style/BlockLength
-require './library/messages'
+require './lib/messages'
 
-class TicTacToe
-  attr_accessor :p_1, :p_2, :p_1_symb, :p_2_symb
-
-  def initialize; end
-
-  # This method Set players names and symbols
-  def u_entry(player_msg)
-    puts player_msg.to_s
-    player = gets.chomp
-    player
-  end
-
-  # Check if name or symbol is already taken
-  def compare_user_entry?
-    @p_1 == @p_2
-  end
-
-  # This method draw the board for the game
-  def board(table)
-    i = 0
-    while i < table.size
-      puts '+---+---+---+'
-      puts "| #{table[i]} | #{table[i + 1]} | #{table[i + 2]} |"
-      i += 3
-    end
-    puts '+---+---+---+'
-  end
-
-  # This method return a modified array,
-  # places the symbols and valid an user's move
-  def move(table, choice, symb)
-    table[table.index(choice)] = symb
-    table
-  end
-
-  # This method check if the game is draw
-  def won
-    false
-  end
-
-  # This method check if the game is draw
-  def draw(tab)
-    if tab.none?(Integer)
-      puts 'The game is tie, play again'
-      true
-    else
-      false
-    end
-  end
-end
 
 # Instaciate TicTacToe class
 game = TicTacToe.new
-game.p_1 = game.u_entry('Player1 enter your name: ')
+game.p_1 = game.u_entry('Player1 enter your name: '.green)
+
 
 # Instaciate Messages class
 messages = Message.new
 messages.info = game.p_1
 
 while messages.name_length?(3, 10)
-  game.p_1 = game.u_entry('Player1 name must be between 3 to 10 characters')
+  game.p_1 = game.u_entry('Player1 name must be between 3 to 10 characters'.red)
   messages.info = game.p_1
 end
 
@@ -121,16 +72,18 @@ loop do
   table = game.move(table, p_1_choice.to_i, game.p_1_symb.to_s)
 
   game.board(table)
-  i = 0
-  while i < table.size
-    if (game.p_1_symb == table[i]) &&
-       (table[i] == table[i + 1] && table[i] == table[i + 2]) ||
-       i.zero? && table[i] == table[i + 4] && table[i] == table[i + 8]
-      puts "Congratulations #{game.p_1}, you win the game!"
-      return !game.won
-    end
-    i += 3
-  end
+  game.h_win(game.p_1, game.p_1_symb, table)
+  break if game.won
+  # i = 0
+  # while i < table.size
+  #   if (game.p_1_symb == table[i]) &&
+  #      (table[i] == table[i + 1] && table[i] == table[i + 2]) ||
+  #      i.zero? && table[i] == table[i + 4] && table[i] == table[i + 8]
+  #     puts "Congratulations #{game.p_1.red}, you win the game!".green
+  #     return !game.won
+  #   end
+  #   i += 3
+  # end
 
   (0..2).each do |nbr|
     if game.p_1_symb == table[nbr] &&
@@ -143,7 +96,7 @@ loop do
     next
   end
 
-  break if game.won || game.draw(table)
+  
 
   p_2_choice = game.u_entry("#{game.p_2} please select a number from 1-9")
   until messages.valid_nbr_from_board?(p_2_choice.to_i, 1, 9, table)[0] &&
