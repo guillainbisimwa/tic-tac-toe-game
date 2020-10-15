@@ -92,26 +92,34 @@ class TicTacToe
     false
   end
 
-  def h_win(p_1, p_1_symb, table)
+  def h_win(symb, table)
     i = 0
     while i < table.size
-      if (p_1_symb == table[i]) &&
+      if (symb == table[i]) &&
          (table[i] == table[i + 1] && table[i] == table[i + 2]) ||
          i.zero? && table[i] == table[i + 4] && table[i] == table[i + 8]
-        puts "Congratulations #{p_1.red}, you win the game!".green
+        return true
       end
+
       i += 3
     end
-    !won
+
+    (0..2).each do |nbr|
+      if symb == table[nbr] &&
+         (table[nbr] == table[nbr + 3] &&
+         table[nbr] == table[nbr + 6]) ||
+         nbr == 2 && table[nbr] == table[nbr + 2] && table[nbr] == table[nbr + 4]
+        return true
+      end
+    end
+
+    false
   end
 
   # This method check if the game is draw
   def draw(tab)
-    if tab.none?(Integer)
-      puts 'The game is tie, play again'
-      true
-    else
-      false
-    end
+    return true if tab.none?(Integer)
+
+    false
   end
 end
