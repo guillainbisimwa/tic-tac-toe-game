@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# rubocop:disable Style/ConditionalAssignment
+# rubocop:disable Style/ConditionalAssignment, Style/Documentation
 require './lib/messages'
 
 class TicTacToe
@@ -16,33 +16,33 @@ class TicTacToe
 end
 
 game = GameLogic.new
-game.p_1 = game.u_entry('Player1 enter your name: '.green)
+game.p_1 = game.u_entry('Player1 enter your name: '.blue)
 
 messages = Message.new
 messages.info = game.p_1
 
 while messages.name_length?(3, 10)
-  game.p_1 = game.u_entry('Player1 name must be between 3 to 10 characters'.red)
+  game.p_1 = game.u_entry('Player1 name must be between 3 to 10 characters'.yellow)
   messages.info = game.p_1
 end
 
-game.p_2 = game.u_entry("\nPlayer2 enter your name: ")
+game.p_2 = game.u_entry("\nPlayer2 enter your name: ".light_blue)
 messages.info = game.p_2
 
 while messages.name_length?(3, 10) || game.compare_user_entry?
   if game.compare_user_entry?
-    messages.info = game.p_2 = game.u_entry('Name already taken!')
+    messages.info = game.p_2 = game.u_entry('Name already taken!'.red)
   else
-    game.p_2 = game.u_entry('Player2 name must be between 3 to 10 characters')
+    game.p_2 = game.u_entry('Player2 name must be between 3 to 10 characters'.yellow)
   end
   messages.info = game.p_2
 end
 
-puts "\nChoose a symbol 'x' or 'o' to play"
-game.p_1_symb = game.u_entry("#{game.p_1}, choose a symbol: ")
+puts "\nChoose a symbol 'x' or 'o' to play".blue
+game.p_1_symb = game.u_entry("#{game.p_1}, choose a symbol: ".yellow)
 
 until messages.valid_symbols?(game.p_1_symb)
-  game.p_1_symb = game.u_entry("Invalid symbol, retry again 'x' or 'o'")
+  game.p_1_symb = game.u_entry("Invalid symbol, retry again 'x' or 'o'".red)
   messages.info = game.p_1
 end
 
@@ -52,8 +52,8 @@ else
   game.p_2_symb = 'x'
 end
 
-puts "\nLet's start, #{game.p_1}: (#{game.p_1_symb})"
-puts "Let's start, #{game.p_2}: (#{game.p_2_symb})"
+puts "\nLet's start, #{game.p_1}: (#{game.p_1_symb})".yellow
+puts "Let's start, #{game.p_2}: (#{game.p_2_symb})".yellow
 
 table = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 tic_tac_toe = TicTacToe.new
@@ -63,7 +63,7 @@ i = 0
 while i.zero?
 
   (0..1).each do |p_c|
-    user = [[game.p_1, game.p_1_symb], [game.p_2, game.p_2_symb]]
+    user = [[game.p_1.blue, game.p_1_symb], [game.p_2.pink, game.p_2_symb]]
 
     choice = game.u_entry("#{user[p_c][0]} please select a number from 1-9")
     until messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[0] &&
@@ -71,7 +71,7 @@ while i.zero?
 
       if messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[0] &&
          !messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[1]
-        choice = game.u_entry("\n#{user[p_c][0]}} Number already taken, retry")
+        choice = game.u_entry("\n#{user[p_c][0]} Number already taken, retry")
       else
         choice = game.u_entry("#{user[p_c][0]} reselect a number from 1-9")
       end
@@ -92,4 +92,4 @@ while i.zero?
   end
 end
 
-# rubocop:enable Style/ConditionalAssignment
+# rubocop:enable Style/ConditionalAssignment, Style/Documentation
