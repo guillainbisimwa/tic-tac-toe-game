@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # rubocop:disable Style/ConditionalAssignment
-require './lib/messages'
+require './lib/gameLogic'
 
 class TicTacToe
   def board(table)
@@ -80,11 +80,10 @@ while i.zero?
       if messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[0] &&
          !messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[1]
         puts "\n#{user[p_c][0]} Number already taken, retry"
-        choice = gets.chomp
       else
         puts "#{user[p_c][0]} reselect a number from 1-9"
-        choice = gets.chomp
       end
+      choice = gets.chomp
     end
 
     table = game.move(table, choice.to_i, user[p_c][1].to_s)
