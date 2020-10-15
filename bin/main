@@ -16,33 +16,40 @@ class TicTacToe
 end
 
 game = GameLogic.new
-game.p_1 = game.u_entry('Player1 enter your name: '.blue)
+puts 'Player1 enter your name: '.blue
+game.p_1 = gets.chomp
 
 messages = Message.new
 messages.info = game.p_1
 
 while messages.name_length?(3, 10)
-  game.p_1 = game.u_entry('Player1 name must be between 3 to 10 characters'.yellow)
+  puts 'Player1 name must be between 3 to 10 characters'.yellow
+  game.p_1 = gets.chomp
   messages.info = game.p_1
 end
 
-game.p_2 = game.u_entry("\nPlayer2 enter your name: ".light_blue)
+puts "\nPlayer2 enter your name: ".light_blue
+game.p_2 = gets.chomp
 messages.info = game.p_2
 
 while messages.name_length?(3, 10) || game.compare_user_entry?
   if game.compare_user_entry?
-    messages.info = game.p_2 = game.u_entry('Name already taken!'.red)
+    puts 'Name already taken!'.red
+    messages.info = game.p_2 = gets.chomp
   else
-    game.p_2 = game.u_entry('Player2 name must be between 3 to 10 characters'.yellow)
+    puts 'Player2 name must be between 3 to 10 characters'.yellow
+    game.p_2 = gets.chomp
   end
   messages.info = game.p_2
 end
 
 puts "\nChoose a symbol 'x' or 'o' to play".blue
-game.p_1_symb = game.u_entry("#{game.p_1}, choose a symbol: ".yellow)
+puts "#{game.p_1}, choose a symbol: ".yellow
+game.p_1_symb = gets.chomp
 
 until messages.valid_symbols?(game.p_1_symb)
-  game.p_1_symb = game.u_entry("Invalid symbol, retry again 'x' or 'o'".red)
+  puts "Invalid symbol, retry again 'x' or 'o'".red
+  game.p_1_symb = gets.chomp
   messages.info = game.p_1
 end
 
@@ -65,15 +72,18 @@ while i.zero?
   (0..1).each do |p_c|
     user = [[game.p_1.blue, game.p_1_symb], [game.p_2.pink, game.p_2_symb]]
 
-    choice = game.u_entry("#{user[p_c][0]} please select a number from 1-9")
+    puts "#{user[p_c][0]} please select a number from 1-9"
+    choice = gets.chomp
     until messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[0] &&
           messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[1]
 
       if messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[0] &&
          !messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[1]
-        choice = game.u_entry("\n#{user[p_c][0]} Number already taken, retry")
+        puts "\n#{user[p_c][0]} Number already taken, retry"
+        choice = gets.chomp
       else
-        choice = game.u_entry("#{user[p_c][0]} reselect a number from 1-9")
+        puts "#{user[p_c][0]} reselect a number from 1-9"
+        choice = gets.chomp
       end
     end
 

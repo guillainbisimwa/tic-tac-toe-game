@@ -54,12 +54,6 @@ class GameLogic
 
   def initialize; end
 
-  def u_entry(player_msg)
-    puts player_msg.to_s
-    player = gets.chomp
-    player
-  end
-
   def compare_user_entry?
     @p_1 == @p_2
   end
