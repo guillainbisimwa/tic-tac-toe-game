@@ -13,16 +13,12 @@ class Message
     false
   end
 
-  # Return two boolean,
-  # The first boolean is true if the nbr is in range from 1 to 9
-  # The second boolean is true if the nbr is not taken (is in the array)
   def valid_nbr_from_board?(nbr, from, to, array)
     [nbr >= from && nbr <= to, array.any?(nbr)]
   end
 end
 
 class String
-  # colorization
   def colorize(color_code)
     "\e[#{color_code}m#{self}\e[0m"
   end
@@ -63,14 +59,10 @@ class GameLogic
     player
   end
 
-  # Check if name or symbol is already taken
   def compare_user_entry?
     @p_1 == @p_2
   end
 
-
-  # This method return a modified array,
-  # places the symbols and valid an user's move
   def move(table, choice, symb)
     table[table.index(choice)] = symb
     table
@@ -100,7 +92,6 @@ class GameLogic
     false
   end
 
-  # This method check if the game is draw
   def draw(tab)
     return true if tab.none?(Integer)
 
