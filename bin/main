@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# rubocop:disable Style/ConditionalAssignment, Style/BlockLength
+# rubocop:disable Style/ConditionalAssignment
 require './lib/messages'
 
 # Instaciate TicTacToe class
@@ -54,52 +54,37 @@ table = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 game.board(table)
 
 # Start playing
-loop do
-  p1_choice = game.u_entry("#{game.p_1} please select a number from 1-9")
-  until messages.valid_nbr_from_board?(p1_choice.to_i, 1, 9, table)[0] &&
-        messages.valid_nbr_from_board?(p1_choice.to_i, 1, 9, table)[1]
+i = 0
+while i.zero?
 
-    if messages.valid_nbr_from_board?(p1_choice.to_i, 1, 9, table)[0] &&
-       !messages.valid_nbr_from_board?(p1_choice.to_i, 1, 9, table)[1]
-      p1_choice = game.u_entry("\n#{game.p_1} Number already taken, retry")
-    else
-      p1_choice = game.u_entry("#{game.p_1} please select v a number from 1-9")
+  (0..1).each do |p_c|
+    user = [[game.p_1, game.p_1_symb], [game.p_2, game.p_2_symb]]
+
+    choice = game.u_entry("#{user[p_c][0]} please select a number from 1-9")
+    until messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[0] &&
+          messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[1]
+
+      if messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[0] &&
+         !messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[1]
+        choice = game.u_entry("\n#{user[p_c][0]}} Number already taken, retry")
+      else
+        choice = game.u_entry("#{user[p_c][0]} reselect a number from 1-9")
+      end
     end
-  end
 
-  table = game.move(table, p1_choice.to_i, game.p_1_symb.to_s)
+    table = game.move(table, choice.to_i, user[p_c][1].to_s)
 
-  game.board(table)
-  if game.h_win(game.p_1_symb, table)
-    puts "Congratulations #{game.p_1.pink}, you win the game!".green
-    break
-  elsif game.draw(table)
-    puts 'The game is tie, play again'.pink
-    break
-  end
-
-  p2_choice = game.u_entry("#{game.p_2} please select a number from 1-9")
-  until messages.valid_nbr_from_board?(p2_choice.to_i, 1, 9, table)[0] &&
-        messages.valid_nbr_from_board?(p2_choice.to_i, 1, 9, table)[1]
-
-    if messages.valid_nbr_from_board?(p2_choice.to_i, 1, 9, table)[0] &&
-       !messages.valid_nbr_from_board?(p2_choice.to_i, 1, 9, table)[1]
-      p2_choice = game.u_entry("\n#{game.p_2} Number already taken, retry")
-    else
-      p2_choice = game.u_entry("#{game.p_2} please select v a number from 1-9")
+    game.board(table)
+    if game.h_win(user[p_c][1], table)
+      puts "Congratulations #{user[p_c][0]} you win the game!".green
+      i = 1
+      break
+    elsif game.draw(table)
+      puts 'The game is tie, play again'.pink
+      i = 1
+      break
     end
-  end
-
-  table = game.move(table, p2_choice.to_i, game.p_2_symb.to_s)
-
-  game.board(table)
-  if game.h_win(game.p_2_symb, table)
-    puts "Congratulations #{game.p_2.blue}, you win the game!".green
-    break
-  elsif game.draw(table)
-    puts 'The game is tie, play again'.pink
-    break
   end
 end
 
-# rubocop:enable Style/ConditionalAssignment, Style/BlockLength
+# rubocop:enable Style/ConditionalAssignment

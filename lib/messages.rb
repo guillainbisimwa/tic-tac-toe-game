@@ -87,11 +87,6 @@ class TicTacToe
     table
   end
 
-  # This method check if the game is draw
-  def won
-    false
-  end
-
   def h_win(symb, table)
     i = 0
     while i < table.size
