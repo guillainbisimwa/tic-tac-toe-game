@@ -1,108 +1,104 @@
 #!/usr/bin/env ruby
 
 # rubocop:disable Style/ConditionalAssignment
+require './lib/game_logic'
 
-# Gets player names
-puts 'Player1 enter your name'
-player_one = gets.chomp
-while player_one.size < 3 || player_one.size > 10
-  puts 'Player1 name must be between 3 to 10 charaters'
-  player_one = gets.chomp
-end
-puts "\nPlayer2 enter your name"
-player_two = gets.chomp
-while player_two.size < 3 || player_two.size > 10 || player_two == player_one
-  if player_two == player_one
-    puts 'Name already taken! Choose an other name'
-  else
-    puts 'Player2 name must be between 3 to 10 charaters'
-  end
-  player_two = gets.chomp
-end
-
-# Display players names
-puts "\nThe first player is #{player_one}"
-puts "The second player is #{player_two}"
-
-# Chosing a symbol
-puts "\nChoose a symbol 'x' or 'o' to play"
-
-puts "\n#{player_one}, you are the first player, choose a symbol: "
-
-player1_symb = gets.chomp
-while player1_symb != 'x' && player1_symb != 'o'
-  puts 'Player1, choose a symbol "x" or "o" '
-  player1_symb = gets.chomp
-end
-
-player1_symb == 'x' ? player2_symb = 'o' : player2_symb = 'x'
-
-# Display the board
-puts "\nLet's start, #{player_one}: (#{player1_symb})"
-puts "Let's start, #{player_two}: (#{player2_symb})"
-puts '+---+---+---+'
-puts '| 1 | 2 | 3 |'
-puts '+---+---+---+'
-puts '| 4 | 5 | 6 |'
-puts '+---+---+---+'
-puts '| 7 | 8 | 9 |'
-puts '+---+---+---+'
-
-# Select player choices
-game_on = true
-while game_on
-  puts "\n#{player_one} please select a number from 1-9 on the board"
-
-  p1_choice = gets.chomp.to_i
-  while p1_choice < 1 || p1_choice > 9
-    puts "#{player_one}, please choose the right number"
-    p1_choice = gets.chomp.to_i
-  end
-
-  puts '+---+---+---+'
-  puts '| x | 2 | 3 |'
-  puts '+---+---+---+'
-  puts '| 4 | 5 | 6 |'
-  puts '+---+---+---+'
-  puts '| 7 | 8 | 9 |'
-  puts '+---+---+---+'
-
-  puts "\n#{player_two} please select a number from 1-9 on the board"
-  p2_choice = gets.chomp.to_i
-  while p1_choice == p2_choice || p2_choice < 1 || p2_choice > 9
-    if p1_choice == p2_choice
-      puts 'This number has already been taken'
-    else
-      puts "#{player_two}, please choose the right number"
+class TicTacToe
+  def board(table)
+    i = 0
+    while i < table.size
+      puts '+---+---+---+'
+      puts "| #{table[i]} | #{table[i + 1]} | #{table[i + 2]} |"
+      i += 3
     end
-    p2_choice = gets.chomp.to_i
+    puts '+---+---+---+'
   end
+end
 
-  puts '+---+---+---+'
-  puts '| x | o | o |'
-  puts '+---+---+---+'
-  puts '| o | x | o |'
-  puts '+---+---+---+'
-  puts '| x | x | o |'
-  puts '+---+---+---+'
+game = GameLogic.new
+puts 'Player1 enter your name: '.blue
+game.p_1 = gets.chomp
 
-  message1 = "Great move #{player_one}, you won the game!"
-  if message1
-    puts message1
-    game_on = false
-  elsif message2
-    puts '+---+---+---+'
-    puts '| x | o | x |'
-    puts '+---+---+---+'
-    puts '| o | x | o |'
-    puts '+---+---+---+'
-    puts '| o | x | o |'
-    puts '+---+---+---+'
-    message2 = 'The game is tie!'
-    puts message2
-    game_on = false
+messages = Message.new
+messages.info = game.p_1
+
+while messages.name_length?(3, 10)
+  puts 'Player1 name must be between 3 to 10 characters'.yellow
+  game.p_1 = gets.chomp
+  messages.info = game.p_1
+end
+
+puts "\nPlayer2 enter your name: ".light_blue
+game.p_2 = gets.chomp
+messages.info = game.p_2
+
+while messages.name_length?(3, 10) || game.compare_user_entry?
+  if game.compare_user_entry?
+    puts 'Name already taken!'.red
+    messages.info = game.p_2 = gets.chomp
+  else
+    puts 'Player2 name must be between 3 to 10 characters'.yellow
+    game.p_2 = gets.chomp
   end
+  messages.info = game.p_2
+end
 
+puts "\nChoose a symbol 'x' or 'o' to play".blue
+puts "#{game.p_1}, choose a symbol: ".yellow
+game.p_1_symb = gets.chomp
+
+until messages.valid_symbols?(game.p_1_symb)
+  puts "Invalid symbol, retry again 'x' or 'o'".red
+  game.p_1_symb = gets.chomp
+  messages.info = game.p_1
+end
+
+if game.p_1_symb == 'x'
+  game.p_2_symb = 'o'
+else
+  game.p_2_symb = 'x'
+end
+
+puts "\nLet's start, #{game.p_1}: (#{game.p_1_symb})".yellow
+puts "Let's start, #{game.p_2}: (#{game.p_2_symb})".yellow
+
+table = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+tic_tac_toe = TicTacToe.new
+tic_tac_toe.board(table)
+
+i = 0
+while i.zero?
+
+  (0..1).each do |p_c|
+    user = [[game.p_1.blue, game.p_1_symb], [game.p_2.pink, game.p_2_symb]]
+
+    puts "#{user[p_c][0]} please select a number from 1-9"
+    choice = gets.chomp
+    until messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[0] &&
+          messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[1]
+
+      if messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[0] &&
+         !messages.valid_nbr_from_board?(choice.to_i, 1, 9, table)[1]
+        puts "\n#{user[p_c][0]} Number already taken, retry"
+      else
+        puts "#{user[p_c][0]} reselect a number from 1-9"
+      end
+      choice = gets.chomp
+    end
+
+    table = game.move(table, choice.to_i, user[p_c][1].to_s)
+
+    tic_tac_toe.board(table)
+    if game.h_win(user[p_c][1], table)
+      puts "Congratulations #{user[p_c][0]} you win the game!".green
+      i = 1
+      break
+    elsif game.draw(table)
+      puts 'The game is tie, play again'.pink
+      i = 1
+      break
+    end
+  end
 end
 
 # rubocop:enable Style/ConditionalAssignment
