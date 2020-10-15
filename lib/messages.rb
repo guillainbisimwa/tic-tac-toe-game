@@ -52,12 +52,11 @@ class String
   end
 end
 
-class TicTacToe
+class GameLogic
   attr_accessor :p_1, :p_2, :p_1_symb, :p_2_symb
 
   def initialize; end
 
-  # This method Set players names and symbols
   def u_entry(player_msg)
     puts player_msg.to_s
     player = gets.chomp
@@ -69,16 +68,6 @@ class TicTacToe
     @p_1 == @p_2
   end
 
-  # This method draw the board for the game
-  def board(table)
-    i = 0
-    while i < table.size
-      puts '+---+---+---+'
-      puts "| #{table[i]} | #{table[i + 1]} | #{table[i + 2]} |"
-      i += 3
-    end
-    puts '+---+---+---+'
-  end
 
   # This method return a modified array,
   # places the symbols and valid an user's move

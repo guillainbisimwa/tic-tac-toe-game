@@ -3,11 +3,21 @@
 # rubocop:disable Style/ConditionalAssignment
 require './lib/messages'
 
-# Instaciate TicTacToe class
-game = TicTacToe.new
+class TicTacToe
+  def board(table)
+    i = 0
+    while i < table.size
+      puts '+---+---+---+'
+      puts "| #{table[i]} | #{table[i + 1]} | #{table[i + 2]} |"
+      i += 3
+    end
+    puts '+---+---+---+'
+  end
+end
+
+game = GameLogic.new
 game.p_1 = game.u_entry('Player1 enter your name: '.green)
 
-# Instaciate Messages class
 messages = Message.new
 messages.info = game.p_1
 
@@ -28,7 +38,6 @@ while messages.name_length?(3, 10) || game.compare_user_entry?
   messages.info = game.p_2
 end
 
-# Choosing a symbols
 puts "\nChoose a symbol 'x' or 'o' to play"
 game.p_1_symb = game.u_entry("#{game.p_1}, choose a symbol: ")
 
@@ -43,17 +52,13 @@ else
   game.p_2_symb = 'x'
 end
 
-# Display the Players
 puts "\nLet's start, #{game.p_1}: (#{game.p_1_symb})"
 puts "Let's start, #{game.p_2}: (#{game.p_2_symb})"
 
-# init table
 table = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+tic_tac_toe = TicTacToe.new
+tic_tac_toe.board(table)
 
-# Dispaly the board
-game.board(table)
-
-# Start playing
 i = 0
 while i.zero?
 
@@ -74,7 +79,7 @@ while i.zero?
 
     table = game.move(table, choice.to_i, user[p_c][1].to_s)
 
-    game.board(table)
+    tic_tac_toe.board(table)
     if game.h_win(user[p_c][1], table)
       puts "Congratulations #{user[p_c][0]} you win the game!".green
       i = 1
