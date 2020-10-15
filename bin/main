@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # rubocop:disable Style/ConditionalAssignment
-require './lib/gameLogic'
+require './lib/game_logic'
 
 class TicTacToe
   def board(table)
