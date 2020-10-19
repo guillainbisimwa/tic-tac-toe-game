@@ -52,8 +52,6 @@ end
 class GameLogic
   attr_accessor :p_1, :p_2, :p_1_symb, :p_2_symb
 
-  def initialize; end
-
   def compare_user_entry?
     @p_1 == @p_2
   end
