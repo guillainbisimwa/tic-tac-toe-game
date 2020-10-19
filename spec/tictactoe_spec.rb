@@ -1,10 +1,9 @@
 require './lib/game_logic'
 
-describe Calculator do
-  describe 'Testing' do
-    it 'Test' do
-      m = Message.new
-      expect(m.valid_symbols?('x')).to eql(true)
+describe Message do
+  context 'name_length?' do
+    it '' do
+      
     end
   end
 end
