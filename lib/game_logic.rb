@@ -1,4 +1,6 @@
-# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
 class Message
   attr_accessor :info
   attr_reader :from, :to
@@ -52,7 +54,7 @@ end
 class GameLogic
   attr_accessor :p_1, :p_2, :p_1_symb, :p_2_symb
 
-  #def initialize; end
+  # def initialize; end
 
   def compare_user_entry?
     @p_1 == @p_2
@@ -94,4 +96,4 @@ class GameLogic
   end
 end
 
-# rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
