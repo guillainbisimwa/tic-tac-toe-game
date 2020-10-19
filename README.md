@@ -43,11 +43,21 @@ Tic-Tac-Toe is one of the most famous games in the world. We have implemented it
 +---+---+---+   +---+---+---+   +---+---+---+   +---+---+---+   +---+---+---+
 
 ```
-* (1) Default Game Board
-* (2) Diagonal win for **o**
-* (3) Horizontal win for **x**
-* (4) Vertical win for **x**
-* (5) Draw
+
+- (1) Default Game Board
+- (2) Diagonal win for **o**
+- (3) Horizontal win for **x**
+- (4) Vertical win for **x**
+- (5) Draw
+
+## How to run the RSpec test
+
+- You need to have the RSpec installed in you computer if you don't have it follow the steps.
+
+Boot up your terminal and punch in gem install rspec to install RSpec. Once that’s done, you can verify your version of RSpec with rspec --version, which will output the current version of each of the packaged gems. Take a minute also to hit rspec --help and look through the various options available.
+
+- cd into the project and open a terminal.
+- In the teminal just write rspec to run the tests.
 
 ## Authors
 
@@ -62,6 +72,12 @@ Tic-Tac-Toe is one of the most famous games in the world. We have implemented it
 - Github: [@githubhandle](https://github.com/Kingobaino1)
 - Twitter: [@twitterhandle](https://twitter.com/ibehkingso)
 - Linkedin: [linkedin](https://www.linkedin.com/in/ibeh-kingsley-obinna-568596177)
+
+👤 **Brian Sammit Cruz Rodriguez**
+
+- Github: [@BrianSammit](https://github.com/BrianSammit)
+- Twitter: [@CruzSammit](https://twitter.com/CruzSammit)
+- Linkedin: [Brian Sammit](https://www.linkedin.com/in/brian-sammit-cruz-rodriguez-5877551a8/)
 
 ## 🤝 Contributing
 
