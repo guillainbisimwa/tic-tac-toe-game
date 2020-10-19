@@ -3,8 +3,10 @@ require './lib/game_logic'
 describe Message do
   let(:arr) { [1, 2, 3, 4, 5, 6, 7, 8, 9] }
   let(:arr_playing) { [1, 2, 3, 4, 5, 6, 7, 'o', 9] }
-  let(:arr_draw) { %w[x x o o x o x o] }
+  let(:arr_draw) { %w[x x o o x x o o] }
   let(:arr_first_moved_x) { ['x', 2, 3, 4, 5, 6, 7, 8, 9] }
+  let(:arr_last_win) { ['x', 'o', 'x', 'x', 'x', 'x', 'o', 'o', 'o'] }
+  let(:arr_last_move_win) { ['x', 'o', 'x', 'x', 'x', 'x', 'o', 8, 'o'] }
 
   context 'name_length?' do
     it 'Testing the length of a name' do
@@ -74,6 +76,18 @@ describe Message do
     it 'Test the invalid move' do
       game_logic = GameLogic.new
       expect(game_logic.move(arr, 8, 'o')).to eql(arr_playing)
+    end
+  end
+
+  context 'Test if there is a winner or not' do
+    it 'No winner' do
+      game_logic = GameLogic.new
+      expect(game_logic.h_win('x', arr)).to eql(false)
+    end
+
+    it 'There is a winner' do
+      game_logic = GameLogic.new
+      expect(game_logic.h_win('o', arr_last_win)).to eql(true)
     end
   end
 end
