@@ -1,9 +1,10 @@
 require './lib/game_logic'
 
 describe Message do
-  let(:arr) { [1, 2, 3, 4, 6, 7, 8, 9] }
-  let(:arr_playing) { [1, 2, 3, 'x', 6, 7, 'o', 9] }
-  let(:arr_draw) { ['x', 'x', 'o', 'o', 'x', 'o', 'x', 'o'] }
+  let(:arr) { [1, 2, 3, 4, 5, 6, 7, 8, 9] }
+  let(:arr_playing) { [1, 2, 3, 4, 5, 6, 7, 'o', 9] }
+  let(:arr_draw) { %w[x x o o x o x o] }
+  let(:arr_first_moved_x) { ['x', 2, 3, 4, 5, 6, 7, 8, 9] }
 
   context 'name_length?' do
     it 'Testing the length of a name' do
@@ -48,7 +49,7 @@ describe Message do
     end
   end
 
-  context '' do
+  context 'Compare two names' do
     it 'compare_user_entry' do
       game_logic = GameLogic.new
       game_logic.p_1 = 'Martin'
@@ -64,4 +65,15 @@ describe Message do
     end
   end
 
+  context 'Make a move' do
+    it 'Test the first player move' do
+      game_logic = GameLogic.new
+      expect(game_logic.move(arr, 1, 'x')).to eql(arr_first_moved_x)
+    end
+
+    it 'Test the invalid move' do
+      game_logic = GameLogic.new
+      expect(game_logic.move(arr, 8, 'o')).to eql(arr_playing)
+    end
+  end
 end
