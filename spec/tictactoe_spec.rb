@@ -46,13 +46,13 @@ describe Message do
   end
 
   context 'Compare two names' do
-    it 'compare_user_entry' do
+    it 'compare the user entry' do
       game_logic.p_1 = 'Martin'
       game_logic.p_2 = 'Kingsley'
       expect(game_logic.compare_user_entry?).to eql(false)
     end
 
-    it 'compare_user_entry' do
+    it 'compare the user entry' do
       game_logic.p_1 = 'Martin'
       game_logic.p_2 = 'Martin'
       expect(game_logic.compare_user_entry?).to eql(true)
