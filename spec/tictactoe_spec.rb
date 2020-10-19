@@ -3,10 +3,9 @@ require './lib/game_logic'
 describe Message do
   let(:arr) { [1, 2, 3, 4, 5, 6, 7, 8, 9] }
   let(:arr_playing) { [1, 2, 3, 4, 5, 6, 7, 'o', 9] }
-  let(:arr_draw) { %w[x x o o x x o o] }
   let(:arr_first_moved_x) { ['x', 2, 3, 4, 5, 6, 7, 8, 9] }
-  let(:arr_last_win) { ['x', 'o', 'x', 'x', 'x', 'x', 'o', 'o', 'o'] }
-  let(:arr_last_move_win) { ['x', 'o', 'x', 'x', 'x', 'x', 'o', 8, 'o'] }
+  let(:arr_last_win) { ['x', 'o', 'x', 'o', 'x', 'x', 'o', 'o', 'o'] }
+  let(:arr_draw) { ['x', 'o', 'x', 'o', 'x', 'o', 'x', 'o', 'o'] }
 
   context 'name_length?' do
     it 'Testing the length of a name' do
@@ -88,6 +87,18 @@ describe Message do
     it 'There is a winner' do
       game_logic = GameLogic.new
       expect(game_logic.h_win('o', arr_last_win)).to eql(true)
+    end
+  end
+
+  context 'Check if the game id tie' do
+    it 'Check if there is a draw' do
+      game_logic = GameLogic.new
+      expect(game_logic.draw(arr)).to eql(false)
+    end
+
+    it 'Check if there is a draw' do
+      game_logic = GameLogic.new
+      expect(game_logic.draw(arr_draw)).to eql(true)
     end
   end
 end
