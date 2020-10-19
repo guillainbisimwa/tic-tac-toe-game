@@ -1,8 +1,8 @@
 require './lib/game_logic'
 
 describe Message do
-  let(:message) {Message.new}
-  let(:game_logic) {GameLogic.new}
+  let(:message) { Message.new }
+  let(:game_logic) { GameLogic.new }
   let(:arr) { [1, 2, 3, 4, 5, 6, 7, 8, 9] }
   let(:arr_playing) { [1, 2, 3, 4, 5, 6, 7, 'o', 9] }
   let(:arr_first_moved_x) { ['x', 2, 3, 4, 5, 6, 7, 8, 9] }
