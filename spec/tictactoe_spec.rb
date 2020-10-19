@@ -89,7 +89,6 @@ describe 'Check_for_winner' do
   let(:arr) { [1, 2, 3, 4, 5, 6, 7, 8, 9] }
   let(:arr_last_win) { %w[x o x o x x o o o] }
 
-
   context 'Test if there is a winner or not' do
     it 'No winner' do
       expect(game_logic.h_win('x', arr)).to eql(false)
