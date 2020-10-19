@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+
 # rubocop:disable Style/ConditionalAssignment
 require './lib/game_logic'
 
